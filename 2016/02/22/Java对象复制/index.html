@@ -5,16 +5,16 @@
   
   <title>Java对象复制 | 梦鲤渔境</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="小先生 家炜">
+  <meta name="description" content="Java对象复制此前在写Java的时候遇到需要复制对象的情况，研究了一下几种情况，记录一下">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java对象复制">
 <meta property="og:url" content="http://JiaWeiBi.github.io/2016/02/22/Java对象复制/index.html">
 <meta property="og:site_name" content="梦鲤渔境">
-<meta property="og:description" content="小先生 家炜">
-<meta property="og:updated_time" content="2016-07-22T11:45:30.853Z">
+<meta property="og:description" content="Java对象复制此前在写Java的时候遇到需要复制对象的情况，研究了一下几种情况，记录一下">
+<meta property="og:updated_time" content="2016-07-22T13:47:40.133Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java对象复制">
-<meta name="twitter:description" content="小先生 家炜">
+<meta name="twitter:description" content="Java对象复制此前在写Java的时候遇到需要复制对象的情况，研究了一下几种情况，记录一下">
   
     <link rel="alternative" href="/atom.xml" title="梦鲤渔境" type="application/atom+xml">
   
@@ -119,7 +119,7 @@
                         
                             <li><a href="/archives">所有文章</a></li>
                         
-                            <li><a href="/study">编程笔记</a></li>
+                            <li><a href="/categories/program">编程笔记</a></li>
                         
                             <li><a href="/life">生活札记</a></li>
                         
@@ -216,7 +216,7 @@
                 
                     <li><a href="/archives">所有文章</a></li>
                 
-                    <li><a href="/study">编程笔记</a></li>
+                    <li><a href="/categories/program">编程笔记</a></li>
                 
                     <li><a href="/life">生活札记</a></li>
                 
@@ -272,6 +272,10 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/program/">program</a>
+    </div>
+
 
         
     <div class="article-tag tagcloud">
@@ -285,7 +289,13 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-        
+        <h1 id="Java对象复制"><a href="#Java对象复制" class="headerlink" title="Java对象复制"></a>Java对象复制</h1><p>此前在写Java的时候遇到需要复制对象的情况，研究了一下几种情况，记录一下</p>
+<a id="more"></a>
+<h2 id="直接使用-赋值"><a href="#直接使用-赋值" class="headerlink" title="直接使用=赋值"></a>直接使用=赋值</h2><p>在Java中除了基本数据类型，其他均为对象类型，直接使用=对基本数据类型可以直接复制，对于对象<br>类型，定义的对象引用变量的值实际上是对象在堆内存（Java对象貌似都是保存在堆内存）中的地址，<br>所以直接=是将地址值赋值给另一个引用变量，这两个引用会引用同一个对象。</p>
+<h2 id="重写Object类中的clone方法"><a href="#重写Object类中的clone方法" class="headerlink" title="重写Object类中的clone方法"></a>重写Object类中的clone方法</h2><p>首先重写clone方法时必须写成public方法，其次，还要注意浅复制和深复制的区别，Object类中的<br>clone方法为浅复制，是本地方法实现的，不由java实现，可以查源码看看</p>
+<h3 id="深复制"><a href="#深复制" class="headerlink" title="深复制"></a>深复制</h3><p>深复制就是另外开辟一块内存，构造一个与原对象一模一样的对象，对于不可变的对象可以直接复制，<br>但也可能会需要调用其他类的clone函数，这时就需要保证这个类的clone也实现了深复制</p>
+<h3 id="浅复制"><a href="#浅复制" class="headerlink" title="浅复制"></a>浅复制</h3><p>对于对象，其数据域可能包含一些不可变类型（基本数据类型或String，Integer等不可变对象），也<br>可能包含其他可变类型的对象，复制时如果直接将对象变量的值（对象在堆中的地址）进行复制那就会<br>造成两个对象变量引用同一个实例，当通过任意一个引用改变对象实例的值，这个改变会反映到所有引<br>用这个实例的引用变量。</p>
+<h4 id="总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据"><a href="#总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据" class="headerlink" title="总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据"></a>总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据</h4>
       
     </div>
     
@@ -296,7 +306,7 @@
         <p><span>本文标题:</span><a href="/2016/02/22/Java对象复制/">Java对象复制</a></p>
         <p><span>文章作者:</span><a href="/" title="访问 SeYan 的个人博客">SeYan</a></p>
         <p><span>发布时间:</span>2016年02月22日 - 15时37分</p>
-        <p><span>最后更新:</span>2016年07月22日 - 19时45分</p>
+        <p><span>最后更新:</span>2016年07月22日 - 21时47分</p>
         <p>
             <span>原始链接:</span><a class="post-url" href="/2016/02/22/Java对象复制/" title="Java对象复制">http://JiaWeiBi.github.io/2016/02/22/Java对象复制/</a>
             <span class="copy-path" data-clipboard-text="原文: http://JiaWeiBi.github.io/2016/02/22/Java对象复制/　　作者: SeYan" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
@@ -312,7 +322,7 @@
 
 <nav id="article-nav">
   
-    <a href="/2016/05/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/07/22/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption"><</strong>
       <div class="article-nav-title">
         
@@ -329,7 +339,7 @@
 
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java对象复制"><span class="toc-number">1.</span> <span class="toc-text">Java对象复制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#直接使用-赋值"><span class="toc-number">1.1.</span> <span class="toc-text">直接使用=赋值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重写Object类中的clone方法"><span class="toc-number">1.2.</span> <span class="toc-text">重写Object类中的clone方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#深复制"><span class="toc-number">1.2.1.</span> <span class="toc-text">深复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浅复制"><span class="toc-number">1.2.2.</span> <span class="toc-text">浅复制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">总而言之就是对象变量的值只是对象实例的地址，简单赋值只是将地址进行复制，要完全复制就必须自行开辟内存来保存对象的数据</span></a></li></ol></li></ol></li></ol></li></ol>
 </div>
 <input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
 
@@ -400,7 +410,7 @@
 
     <div class="scroll" id="post-nav-button">
         
-            <a href="/2016/05/25/hello-world/" title="上一篇: Hello World">
+            <a href="/2016/07/22/hello-world/" title="上一篇: Hello World">
                 <i class="fa fa-angle-left"></i>
             </a>
         
@@ -409,7 +419,7 @@
             <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
         
     </div>
-    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/25/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Java对象复制/">Java对象复制</a></li></ul>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/07/22/hello-world/">Hello World</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/02/22/Java对象复制/">Java对象复制</a></li></ul>
     <script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
     <script>
         $(".post-list").addClass("toc-article");
